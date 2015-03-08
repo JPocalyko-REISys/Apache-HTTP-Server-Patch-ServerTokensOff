@@ -1,6 +1,6 @@
-diff -C 3 -r httpd-2.4.12/modules/http/http_filters.c httpd-2.4.12.ServerSignatureOff/modules/http/http_filters.c
-*** httpd-2.4.12/modules/http/http_filters.c	2015-03-06 19:33:10.298439376 -0800
---- httpd-2.4.12.ServerSignatureOff/modules/http/http_filters.c	2015-03-06 19:33:27.178439032 -0800
+diff -C 3 -r httpd-2.4.12/modules/http/http_filters.c httpd-2.4.12.ServerTokensOff/modules/http/http_filters.c
+*** httpd-2.4.12/modules/http/http_filters.c	2015-03-06 19:33:10.000000000 -0800
+--- httpd-2.4.12.ServerTokensOff/modules/http/http_filters.c	2015-03-06 19:33:27.000000000 -0800
 ***************
 *** 1035,1041 ****
   
@@ -35,9 +35,9 @@ diff -C 3 -r httpd-2.4.12/modules/http/http_filters.c httpd-2.4.12.ServerSignatu
           apr_table_unset(r->headers_out, "Server");
       }
   }
-diff -C 3 -r httpd-2.4.12/server/core.c httpd-2.4.12.ServerSignatureOff/server/core.c
-*** httpd-2.4.12/server/core.c	2015-03-06 19:32:37.106440054 -0800
---- httpd-2.4.12.ServerSignatureOff/server/core.c	2015-03-06 19:32:54.474439699 -0800
+diff -C 3 -r httpd-2.4.12/server/core.c httpd-2.4.12.ServerTokensOff/server/core.c
+*** httpd-2.4.12/server/core.c	2015-03-06 19:32:37.000000000 -0800
+--- httpd-2.4.12.ServerTokensOff/server/core.c	2015-03-06 19:32:54.000000000 -0800
 ***************
 *** 3136,3142 ****
       SrvTk_MINIMAL,       /* eg: Apache/2.0.41 */

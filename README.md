@@ -12,7 +12,7 @@ How:
 - Configure (<-- many Internet tutorials on how to do this) and compile ("make") Apache as you normally would
 - Set directive "ServerTokens off" in the httpd.conf file
 
-- Sample commands:
+- Sample commands for a Linux system:
     - wget http://psg.mtu.edu/pub/apache/httpd/httpd-2.4.12.tar.gz <-- Download from one of the mirrors
     - tar xvfz httpd-2.4.12.tar.gz                                 <-- Uncompress/and extract Apache source
     - cd httpd-2.4.12                                              <-- Change to the newly created directory

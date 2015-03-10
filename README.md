@@ -2,7 +2,7 @@ What: Adds an "Off" option for the "ServerTokens" directive that causes Apache H
 
 Why: There is presently no ServerTokens option that can stop Apache from sending information about itself in response headers to client requests. The current options offer variations, but no predefined option stops it entirely. I found Sebastian Nohn implemented the same patch in 2006 against HTTPD 2.0.58, and the Apache PMC consciously decided to not offer this "easy" a manner of turning off the branding, for a variety of reasons.
 
-Where: httpd-2.4.12.ServerTokensOff.patch is in the root of this repository. This has been tested only on Linux, though it should work everywhere.
+Where: httpd-2.4.12.ServerTokensOff.patch is in the root of this repository. This has been tested only on Linux, though it should work everywhere. Let me know if you have a problem with it.
 
 How:
 - Download the file "httpd-2.4.12.ServerTokensOff.patch" from this repository

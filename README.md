@@ -30,4 +30,5 @@ Thread of Apache team discussing whether or not to include the patch (they decid
 http://apache-http-server.18135.x6.nabble.com/vote-on-concept-of-ServerTokens-Off-tt4796590.html#none
 
 You can see the original versions of the relevant source files under directory "httpd-2.4.12"
+
 You can see the modified versions of those relevant source files under directory "httpd-2.4.12.ServerTokensOff"

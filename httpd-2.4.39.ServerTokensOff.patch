@@ -1,0 +1,92 @@
+diff -C 3 -r httpd-2.4.39/modules/http/http_filters.c httpd-2.4.39.ServerTokensOff/modules/http/http_filters.c
+*** httpd-2.4.39/modules/http/http_filters.c	2019-03-13 06:09:08.000000000 -0400
+--- httpd-2.4.39.ServerTokensOff/modules/http/http_filters.c	2019-07-22 19:00:31.458893576 -0400
+***************
+*** 1118,1124 ****
+  
+      if (!server && *us)
+          server = us;
+!     if (server)
+          form_header_field(&h, "Server", server);
+  
+      if (APLOGrtrace3(r)) {
+--- 1118,1124 ----
+  
+      if (!server && *us)
+          server = us;
+!     if (server && strlen(server))
+          form_header_field(&h, "Server", server);
+  
+      if (APLOGrtrace3(r)) {
+***************
+*** 1141,1147 ****
+  
+      /* unset so we don't send them again */
+      apr_table_unset(r->headers_out, "Date");        /* Avoid bogosity */
+!     if (server) {
+          apr_table_unset(r->headers_out, "Server");
+      }
+  }
+--- 1141,1147 ----
+  
+      /* unset so we don't send them again */
+      apr_table_unset(r->headers_out, "Date");        /* Avoid bogosity */
+!     if (server && strlen(server)) {
+          apr_table_unset(r->headers_out, "Server");
+      }
+  }
+diff -C 3 -r httpd-2.4.39/server/core.c httpd-2.4.39.ServerTokensOff/server/core.c
+*** httpd-2.4.39/server/core.c	2019-03-18 04:49:59.000000000 -0400
+--- httpd-2.4.39.ServerTokensOff/server/core.c	2019-07-22 19:04:33.591896922 -0400
+***************
+*** 3435,3441 ****
+      SrvTk_MINIMAL,       /* eg: Apache/2.0.41 */
+      SrvTk_OS,            /* eg: Apache/2.0.41 (UNIX) */
+      SrvTk_FULL,          /* eg: Apache/2.0.41 (UNIX) PHP/4.2.2 FooBar/1.2b */
+!     SrvTk_PRODUCT_ONLY   /* eg: Apache */
+  };
+  static enum server_token_type ap_server_tokens = SrvTk_FULL;
+  
+--- 3435,3442 ----
+      SrvTk_MINIMAL,       /* eg: Apache/2.0.41 */
+      SrvTk_OS,            /* eg: Apache/2.0.41 (UNIX) */
+      SrvTk_FULL,          /* eg: Apache/2.0.41 (UNIX) PHP/4.2.2 FooBar/1.2b */
+!     SrvTk_PRODUCT_ONLY,  /* eg: Apache */
+!     SrvTk_OFF            /* Don't send a Server: header at all */
+  };
+  static enum server_token_type ap_server_tokens = SrvTk_FULL;
+  
+***************
+*** 3511,3516 ****
+--- 3512,3520 ----
+      else if (ap_server_tokens == SrvTk_MAJOR) {
+          ap_add_version_component(pconf, AP_SERVER_BASEPRODUCT "/" AP_SERVER_MAJORVERSION);
+      }
++     else if (ap_server_tokens == SrvTk_OFF) {
++         ap_add_version_component(pconf, "");
++     }
+      else {
+          ap_add_version_component(pconf, AP_SERVER_BASEVERSION " (" PLATFORM ")");
+      }
+***************
+*** 3552,3559 ****
+      else if (!strcasecmp(arg, "Full")) {
+          ap_server_tokens = SrvTk_FULL;
+      }
+      else {
+!         return "ServerTokens takes 1 argument: 'Prod(uctOnly)', 'Major', 'Minor', 'Min(imal)', 'OS', or 'Full'";
+      }
+  
+      return NULL;
+--- 3556,3566 ----
+      else if (!strcasecmp(arg, "Full")) {
+          ap_server_tokens = SrvTk_FULL;
+      }
++     else if (!strcasecmp(arg, "Off")) {
++         ap_server_tokens = SrvTk_OFF;
++     }
+      else {
+!         return "ServerTokens takes 1 argument: 'Prod(uctOnly)', 'Major', 'Minor', 'Min(imal)', 'OS', 'Full', or 'Off'";
+      }
+  
+      return NULL;

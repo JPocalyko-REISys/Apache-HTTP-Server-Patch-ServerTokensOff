@@ -1,0 +1,23 @@
+diff -C 3 -r rpmbuild/SPECS/httpd24u.spec rpmbuild/SPECS/httpd24u.spec.new
+*** rpmbuild/SPECS/httpd24u.spec	2019-04-02 15:11:04.000000000 -0400
+--- rpmbuild/SPECS/httpd24u.spec.new	2019-07-22 19:13:28.794904318 -0400
+***************
+*** 79,84 ****
+--- 79,85 ----
+  Patch29: httpd-2.4.33-systemd.patch
+  Patch30: httpd-2.4.4-cachehardmax.patch
+  Patch34: httpd-2.4.17-socket-activation.patch
++ Patch40: httpd-2.4.39.ServerTokensOff.patch
+  
+  # Bug fixes
+  # https://bugzilla.redhat.com/show_bug.cgi?id=1397243
+***************
+*** 292,297 ****
+--- 293,299 ----
+  %{?with_systemd:%patch29 -p1 -b .systemd}
+  %patch30 -p1 -b .cachehardmax
+  %{?with_systemd:%patch34 -p1 -b .socketactivation}
++ %patch40 -p1 -b .servertokensoff
+  %patch58 -p1 -b .r1738878
+  
+  # Patch in the vendor string
